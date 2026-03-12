@@ -346,6 +346,7 @@ RTMP_Init(RTMP *r)
   r->m_fVideoCodecs = 252.0;
   r->Link.timeout = 30;
   r->Link.swfAge = 30;
+  r->Link.localAddress = NULL;
 }
 
 void
@@ -4226,6 +4227,12 @@ CloseInternal(RTMP *r, int reconnect)
       r->Link.lFlags ^= RTMP_LF_FAPU;
     }
 
+  if (r->Link.localAddress) 
+    {
+        free(r->Link.localAddress);
+        r->Link.localAddress = NULL;
+    }
+
   if (!reconnect)
     {
       free(r->Link.playpath0.av_val);
@@ -5180,4 +5187,15 @@ RTMP_Write(RTMP *r, const char *buf, int size)
 	}
     }
   return size+s2;
+}
+
+void RTMP_SetLocalAddress(RTMP *r, const char *addr)
+{
+    if (!addr)
+        return;
+
+    if (r->Link.localAddress)
+        free(r->Link.localAddress);
+
+    r->Link.localAddress = strdup(addr);
 }

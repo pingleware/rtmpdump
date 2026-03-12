@@ -194,6 +194,7 @@ extern "C"
     uint8_t SWFHash[RTMP_SWF_HASHLEN];
     char SWFVerificationResponse[RTMP_SWF_HASHLEN+10];
 #endif
+    char *localAddress;
   } RTMP_LNK;
 
   /* state for read() wrapper */
