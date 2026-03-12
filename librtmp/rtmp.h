@@ -290,6 +290,7 @@ extern "C"
   void RTMP_SetBufferMS(RTMP *r, int size);
   void RTMP_UpdateBufferMS(RTMP *r);
 
+  void RTMP_SetLocalAddress(RTMP *r, const char *addr);
   int RTMP_SetOpt(RTMP *r, const AVal *opt, AVal *arg);
   int RTMP_SetupURL(RTMP *r, char *url);
   void RTMP_SetupStream(RTMP *r, int protocol,
